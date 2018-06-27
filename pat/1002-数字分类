@@ -1,0 +1,61 @@
+#include <stdio.h>
+ 
+int main(){
+  int n,a1=0,a2=0,a3=0,a5=0;
+  int count1,count2,count3,count4,count5;
+  count1=count2=count3=count4=count5=0;
+  int sum4=0;
+  float a4;
+  scanf("%d",&n);
+  int i,tmp;
+  for(i=0;i<n;i++){
+    scanf("%d",&tmp);
+    if(tmp%10==0 && tmp!=0){
+      a1+=tmp;
+      count1++;
+    }
+    else if(tmp%5==1){
+      if(count2%2==0){
+        a2+=tmp;
+      }
+      else{
+        a2-=tmp;
+      }
+      count2++;
+    }
+    else if(tmp%5==2){
+      a3++;
+      count3++;
+    }
+    else if(tmp%5==3){
+      sum4+=tmp;
+      count4++;
+    }
+    else if(tmp%5==4){
+      a5=a5>=tmp?a5:tmp;
+      count5++;
+    }
+  }
+  a4=sum4;
+  if(count1>0)
+    printf("%d ",a1);
+  else
+    printf("N ");
+  if(count2>0)
+    printf("%d ",a2);
+  else
+    printf("N ");
+  if(count3>0)
+    printf("%d ",a3);
+  else
+    printf("N ");
+  if(count4>0)
+    printf("%.1f ",a4/count4);
+  else
+    printf("N ");
+  if(count5>0)
+    printf("%d",a5);
+  else
+    printf("N");
+  return 0;
+}

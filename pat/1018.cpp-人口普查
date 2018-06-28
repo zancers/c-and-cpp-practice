@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+struct Person{
+        char name[6];
+        char birth[11];
+};
+
+int getYmd(char s[]){
+        int ymd=0,i=0,count=0;
+        char tmpstr[9]={0};
+        for(i=0; i<strlen(s); i++){
+                if(i!=4 && i!=7){
+                        tmpstr[count++]=s[i];
+                }
+        }
+        tmpstr[count]='\0';
+        ymd=atoi(tmpstr);
+        return ymd;
+}
+
+int main(){
+        int n=0,i=0,cnt=0;
+        int nowtime = 20140906, earliest = 18140906;
+        cin >> n;
+        Person tmp, old = {"","2014/09/06"}, young = {"","1814/09/06"};
+        for(i=0; i<n; i++){
+                cin >> tmp.name >> tmp.birth;
+                int tmpymd = getYmd(tmp.birth);
+                if(tmpymd<=nowtime && tmpymd>=earliest){
+                        cnt++;//生日合法
+                        if(tmpymd<=getYmd(old.birth)){//最大年龄
+                                strcpy(old.birth, tmp.birth);
+                                strcpy(old.name, tmp.name);
+                        }
+                        if(tmpymd>=getYmd(young.birth)){//最小年龄
+                                strcpy(young.birth, tmp.birth);
+                                strcpy(young.name, tmp.name);
+                        }
+                }
+        }
+        cout << cnt << ' ' << old.name << ' ' << young.name << endl;
+        return 0;
+}

@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+ 
+int main(){
+        char a[1000];
+        int b,r,i;
+        scanf("%s %d",a,&b);
+        int len=strlen(a);
+        int tmpbcs=0,tmpys=0,count=0;
+        for(i=0;i<len;i++){
+                tmpbcs=a[i]-'0'+tmpys*10;
+                if(tmpbcs/b>0){
+                        //s[count++]=tmpbcs/b;
+                        printf("%d",tmpbcs/b);
+                }
+                else if(tmpbcs/b==0){
+                        if(i!=0){
+                        //s[count++]=tmpbcs/b;
+                        printf("%d",tmpbcs/b);
+                        }
+                }
+                tmpys=tmpbcs%b;
+        }
+        r=tmpys;
+        //printf("%s %d\n",s,r);
+        printf(" %d\n",r);
+        return 0;
+}

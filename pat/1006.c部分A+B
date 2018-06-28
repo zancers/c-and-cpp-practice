@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+//gcc 1006.c -o 1006c -lm
+int main(){
+        char a[11],b[11];
+        int da,db;
+        scanf("%s %d %s %d",a,&da,b,&db);
+        int la,lb,pa=0,pb=0,counta=0,countb=0;
+        la=strlen(a);
+        lb=strlen(b);
+        int i;
+        for(i=0;i<la;i++){
+                if((a[i]-'0')==da){
+                        pa+=(da*pow(10,counta));
+                        counta++;
+                }
+        }
+        for(i=0;i<lb;i++){
+                if((b[i]-'0')==db){
+                        pb+=(db*pow(10,countb));
+                        countb++;
+                }
+        }
+        printf("%d",pa+pb);
+        return 0;
+}

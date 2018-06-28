@@ -1,0 +1,25 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int getnum(int n){
+        char a[5];
+        int inc,dec,sub;
+        sprintf(a,"%04d",n);
+        sort(a,a+4);
+        inc=atoi(a);
+        dec=(a[3]-'0') * 1000 + (a[2]-'0') * 100 + (a[1]-'0') * 10 + (a[0]-'0');
+        sub=dec-inc;
+        printf("%04d - %04d = %04d\n",dec,inc,sub);
+        return sub;
+}
+
+int main(){
+        int num;
+        cin>>num;
+        do{
+                num=getnum(num);
+        }while(num!=6174 && num!=0);
+        return 0;
+}

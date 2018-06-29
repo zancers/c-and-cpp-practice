@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+bool checked(char s[]){
+        int weight[]={7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};
+        char m[]={'1','0','x','9','8','7','6','5','4','3','2'};
+        int i,z=0;
+        for(i=0; i<17; i++){
+                if(s[i]-'0'>=0 && s[i]-'0'<=9){
+                        //z+=(s[i]-'0'+weight[i]);
+                        z+=((s[i]-'0')*weight[i]);
+                }
+                else{
+                        return false;
+                }
+        }
+        z=z%11;
+
+        if(m[z]==s[17]){
+                return true;
+        }
+        else{
+                return false;
+        }
+
+}
+
+int main(){
+        int n,i,count=0;
+        cin >> n;
+        char id[n][19];
+        for(i=0; i<n; i++){
+                cin >> id[i];
+                if(!checked(id[i])){
+                        cout << id[i] << endl;
+                        count++;
+                }
+        }
+        if(count==0){
+                cout << "All passed" << endl;
+        }
+        return 0;
+}

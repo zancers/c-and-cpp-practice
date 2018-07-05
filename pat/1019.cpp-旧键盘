@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+char to_upper(char ch){
+        if(ch>='a' && ch <='z'){
+                ch-=32;
+        }
+        return ch;
+}
+
+int main(){
+        char src[81],sub[81],bad[81],uppersrc,uppersub;
+        cin >> src >> sub;
+        int i,j,lengthsrc,lengthbad,possub=0,posbad=0,count=0;
+        lengthsrc=strlen(src);
+        for(i=0; i<lengthsrc; i++){
+                uppersrc=to_upper(src[i]);
+                uppersub=to_upper(sub[possub]);
+                if(uppersrc==uppersub){
+                        possub++;
+                }
+                else{
+                        bad[posbad++]=uppersrc;
+                        lengthbad=strlen(bad);
+                        for(j=0; j<lengthbad; j++){
+                                if(uppersrc==bad[j])
+                                        count++;
+                        }
+                        if(count==1){
+                                cout << uppersrc;
+                        }
+                        count=0;
+                }
+        }
+        cout << endl;
+        return 0;
+}

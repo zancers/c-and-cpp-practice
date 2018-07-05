@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+int main(){
+        char broken[128]={0},tmp;
+        while((tmp=getchar())!='\n'){
+                broken[tmp]=1;
+        }
+        while((tmp=getchar())!='\n'){
+                if((isupper(tmp) && broken[43]==1) || broken[toupper(tmp)]==1){
+                        continue;
+                }
+                else{
+                        cout << tmp;
+                }
+        }
+        cout << endl;
+        return 0;
+}

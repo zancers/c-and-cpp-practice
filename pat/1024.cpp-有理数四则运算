@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <cstdlib> //atoi(), abs(), 
+#include <cstdio> //sprintf(), sscanf()
+using namespace std;
+
+
+int gcd(int a,int b){
+        int c;
+        while(b != 0){
+                c = a % b;
+                a = b;
+                b = c;
+        }
+        return a;
+}
+
+string to_simple(string s){
+        int i_numr, i_denom;//分子，分母
+        sscanf(s.c_str(), "%d/%d", &i_numr, &i_denom);
+        int i_abs_numr = abs(i_numr), i_abs_denom = abs(i_denom);
+        if(i_abs_denom == 0){//分母为0，只可能为除法的结果
+                return "Inf";
+        }
+        int g = gcd(i_abs_numr, i_abs_denom);
+        int i_z = i_abs_numr/i_abs_denom;//整数部分
+        int i_x_fz = (i_abs_numr/g)%(i_abs_denom/g);//小数部分的分子
+        int i_x_fm = i_abs_denom/g;//小数部分的分母
+
+        char temp[100];
+        if(i_z == 0 && i_x_fz == 0){
+                sprintf(temp, "%d", i_x_fz);
+        }
+        else if(i_z == 0 && i_x_fz != 0){
+                sprintf(temp, "%d/%d", i_x_fz, i_x_fm);
+        }
+        else if(i_z != 0 && i_x_fz == 0){
+                sprintf(temp, "%d", i_z);
+        }
+        else if(i_z != 0 && i_x_fz != 0){
+                sprintf(temp, "%d %d/%d", i_z, i_x_fz, i_x_fm);
+        }
+        char s_res[100];
+        if((i_numr > 0 && i_denom < 0) || (i_numr < 0 && i_denom > 0)){
+                sprintf(s_res, "(-%s)", temp);
+        }
+        else{
+                sprintf(s_res, "%s", temp);
+        }
+        string s_s = s_res;
+        return s_s;
+}
+
+int main(){
+        string s_1, s_2;
+        cin >> s_1 >> s_2;
+        int a1, b1, a2, b2;
+
+        sscanf(s_1.c_str(), "%d/%d", &a1, &b1);//第一个操作数分子分母分离
+        sscanf(s_2.c_str(), "%d/%d", &a2, &b2);//第二个操作数分子分母分离
+        char add[100], sub[100], mul[100], div[100];//定义加、减、乘、除的结果串
+        string ss1 = to_simple(s_1), ss2 = to_simple(s_2);
+        sprintf(add, "%d/%d", a1*b2+a2*b1, b1*b2);//加的结果串
+        cout << ss1 << " + " << ss2 << " = " << to_simple(add) << endl;
+
+        sprintf(sub, "%d/%d", a1*b2-a2*b1, b1*b2);//减的结果串
+        cout << ss1 << " - " << ss2 << " = " << to_simple(sub) << endl;
+
+        sprintf(mul, "%d/%d", a1*a2, b1*b2);//乘的结果串
+        cout << ss1 << " * " << ss2 << " = " << to_simple(mul) << endl;
+
+        sprintf(div, "%d/%d", a1*b2, a2*b1);//除的结果串
+        cout << ss1 << " / " << ss2 << " = " << to_simple(div) << endl;
+        return 0;
+}

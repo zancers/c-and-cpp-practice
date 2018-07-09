@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+        char sold[128] = {0}, buy[128] = {0}, ch;
+        while((ch = getchar()) != '\n'){
+                sold[ch] = sold[ch] + 1;
+        }
+        while((ch = getchar()) != '\n'){
+                buy[ch] = buy[ch] + 1;
+        }
+        int i, extra = 0, lack = 0;
+        for(i = 0; i < 127; i ++){
+                if(buy[i] - sold[i] > 0){
+                        lack += (buy[i] - sold[i]);
+                }
+                else{
+                        extra += (sold[i] - buy[i]);
+                }
+        }
+        if(lack > 0){
+                cout << "No " << lack << endl;
+        }
+        else{
+                cout << "Yes " << extra << endl;
+        }
+        return 0;
+}

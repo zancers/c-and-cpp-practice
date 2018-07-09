@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+        int n, score[101] = {0}, tmp = 0, k;
+        cin >> n;
+        while(n > 0){
+                cin >> tmp;
+                score[tmp]++;
+                n --;
+        }
+        cin >> k;
+        while(k > 1){
+                cin >> tmp;
+                cout << score[tmp] << ' ';
+                k --;
+        }
+        cin >> tmp;
+        cout << score[tmp] << endl;
+        return 0;
+}

@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+        char ch;
+        int p = 0, a = 0, t = 0;
+        while((ch = getchar()) != '\n'){
+                if(ch == 'P'){
+                        p ++;
+                }
+                else if(ch == 'A'){
+                        a += p;
+                        a = a % 1000000007;
+                }
+                else{
+                        t += a;
+                        t = t % 1000000007;
+                }
+
+        }
+        cout << t << endl;
+        return 0;
+}

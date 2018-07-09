@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int main(){
+        string p, a;
+        cin >> p >> a;
+        int p_pos1 = p.find("."), p_pos2 = p.find(".", p_pos1 + 1);
+        int p_galleon = atoi(p.substr(0, p_pos1).c_str());
+        int p_sickle = atoi(p.substr(p_pos1 + 1, p_pos2).c_str());
+        int p_knut = atoi(p.substr(p_pos2 + 1).c_str());
+
+        int a_pos1 = a.find("."), a_pos2 = a.find(".", a_pos1 + 1);
+        int a_galleon = atoi(a.substr(0, a_pos1).c_str());
+        int a_sickle = atoi(a.substr(a_pos1 + 1, a_pos2).c_str());
+        int a_knut = atoi(a.substr(a_pos2 + 1).c_str());
+
+
+        int r_knut = 0, r_sickle = 0, r_galleon = 0;
+        if(a_galleon > p_galleon || (a_galleon == p_galleon && a_sickle > p_sickle) || (a_galleon == p_galleon && a_sickle == p_sickle && a_knut > p_knut)){//够
+                if(a_knut - p_knut >= 0){
+                        r_knut = a_knut - p_knut;
+                }
+                else{
+                        r_knut = a_knut + 29 - p_knut;
+                        a_sickle --;
+                }
+                if(a_sickle - p_sickle >= 0){
+                        r_sickle = a_sickle - p_sickle;
+                }
+                else{
+                        r_sickle = a_sickle + 17 - p_sickle;
+                        a_galleon --;
+                }
+                r_galleon = a_galleon - p_galleon;
+        }
+        else{//不够
+                if(p_knut - a_knut >= 0){
+                        r_knut = p_knut - a_knut;
+                }
+                else{
+                        r_knut = p_knut + 29 - a_knut;
+                        p_sickle --;
+                }
+                if(p_sickle - a_sickle >= 0){
+                        r_sickle = p_sickle - a_sickle;
+                }
+                else{
+                        r_sickle = p_sickle + 17 - a_sickle;
+                        p_galleon --;
+                }
+                r_galleon = -(p_galleon - a_galleon);
+        }
+        cout << r_galleon << '.' << r_sickle << '.' << r_knut << endl;
+        return 0;
+}

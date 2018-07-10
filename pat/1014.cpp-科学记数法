@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string> //string.c_str() string.substr() string.length()
+#include <cstdlib> //atoi() abs()
+#include <cmath> //pow()
+using namespace std;
+
+int main(){
+        string a;
+        cin >> a;
+        int p_pos = a.find(".", 0), e_pos = a.find("E", 0), i;
+        string s_sym = a.substr(0, 1);//符号
+        string d_num = a.substr(p_pos - 1, e_pos - p_pos +1);//数值部分
+        int i_exp = atoi(a.substr(e_pos + 1).c_str());//指数
+        int d_num_len = d_num.length();//数值长度
+
+
+        if(s_sym == "-"){//负数
+                cout << '-';
+        }
+        if(i_exp > 0){//指数大于零
+                if(i_exp >= d_num_len - 2){
+                        for(i = 0; i < d_num_len; i ++){
+                                if(i != 1){
+                                        cout << d_num[i];
+                                }
+                        }
+                        string tmp1(i_exp - d_num_len + 2, '0');//0要加单引号，否则无效
+                        //cout << '.';
+                        //string tmp1(d_num_len - 2, '0');
+                        cout << tmp1 << endl;
+                }
+                else{
+                        for(i = 0; i < i_exp; i ++){
+                                cout << d_num[i + 2];
+                        }
+                        cout << '.';
+                        string tmp2(d_num_len - 2 - i_exp, '0');
+                        cout << tmp2 << endl;
+                }
+        }
+        else if(i_exp < 0){//指数小于零
+                cout << "0.";
+                string tmp3(abs(i_exp) - 1, '0');//初始化string第一个变量不能为负
+                cout << tmp3;
+                for(i = 0; i < d_num_len; i ++){
+                        if(i != 1){
+                                cout << d_num[i];
+                        }
+                }
+                cout << endl;
+        }
+        else{
+                cout << d_num << endl;
+        }
+        return 0;
+}
